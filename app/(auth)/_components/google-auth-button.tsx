@@ -15,7 +15,7 @@ const GoogleAuthButton = () => {
   };
 
   return (
-    <Button className="font-semibold" onClick={handleSignin}>
+    <Button className="font-semibold rounded-lg" onClick={handleSignin}>
       <Icons.google className="w-4 h-4 mr-2" />
       Continue with Google
     </Button>
