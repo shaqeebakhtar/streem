@@ -9,39 +9,27 @@ const Toggle = () => {
   const label = collapsed ? 'Expand' : 'Collapse';
 
   return (
-    <>
-      {collapsed && (
-        <div className="px-2 py-2">
-          <Hint asChild label={label} side="right">
-            <Button
-              onClick={onExpand}
-              variant={'ghost'}
-              className="hidden md:flex hover:bg-zinc-700"
-              size={'icon'}
-            >
+    <div className="hidden md:block px-2 py-2">
+      <div className="flex items-center justify-between">
+        {!collapsed && (
+          <p className="font-bold text-lg tracking-wider">For You</p>
+        )}
+        <Hint asChild label={label} side="right">
+          <Button
+            onClick={collapsed ? onExpand : onCollapse}
+            variant={'ghost'}
+            className="hover:bg-zinc-700"
+            size={'icon'}
+          >
+            {collapsed ? (
               <ArrowRightFromLine className="w-5 h-5" />
-            </Button>
-          </Hint>
-        </div>
-      )}
-      {!collapsed && (
-        <div className="px-3 py-2">
-          <div className="flex items-center justify-between">
-            <p className="font-bold text-lg tracking-wider">For You</p>
-            <Hint asChild label={label} side="right">
-              <Button
-                onClick={onCollapse}
-                variant={'ghost'}
-                size={'icon'}
-                className="hover:bg-zinc-700"
-              >
-                <ArrowLeftFromLine className="w-5 h-5" />
-              </Button>
-            </Hint>
-          </div>
-        </div>
-      )}
-    </>
+            ) : (
+              <ArrowLeftFromLine className="w-5 h-5" />
+            )}
+          </Button>
+        </Hint>
+      </div>
+    </div>
   );
 };
 

@@ -16,7 +16,7 @@ type HintProps = {
 
 const Hint = ({ children, asChild, label, align, side }: HintProps) => {
   return (
-    <TooltipProvider delayDuration={200}>
+    <TooltipProvider delayDuration={0}>
       <Tooltip>
         <TooltipTrigger asChild={asChild}>{children}</TooltipTrigger>
         <TooltipContent
