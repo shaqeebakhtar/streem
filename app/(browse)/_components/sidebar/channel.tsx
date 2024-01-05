@@ -1,5 +1,7 @@
 import ChannelAvatar from '@/components/channel-avatar';
+import LiveBadge from '@/components/live-badge';
 import { Button } from '@/components/ui/button';
+import { Skeleton } from '@/components/ui/skeleton';
 import { cn } from '@/lib/utils';
 import { useSidebar } from '@/store/use-sidebar';
 import Link from 'next/link';
@@ -28,17 +30,31 @@ const Channel = ({ username, imageUrl, isLive }: ChannelProps) => {
       )}
       asChild
     >
-      <Link href={href} className="flex items-center space-x-2">
-        <ChannelAvatar
-          imageUrl={imageUrl}
-          username={username}
-          isLive={isLive}
-          showLiveBadge={false}
-        />
-        {!collapsed && <p className="font-semibold">{username}</p>}
+      <Link href={href} className="flex items-center justify-between">
+        <div className="flex items-center space-x-2">
+          <ChannelAvatar
+            imageUrl={imageUrl}
+            username={username}
+            isLive={false}
+            showLiveBadge={false}
+          />
+          {!collapsed && <p className="font-semibold truncate">{username}</p>}
+        </div>
+        {!collapsed && isLive && <LiveBadge />}
       </Link>
     </Button>
   );
 };
 
 export default Channel;
+
+export const ChannelSkeleton = () => {
+  return (
+    <div className="flex items-center space-x-2 py-1.5 px-2 h-auto w-full">
+      <Skeleton className="rounded-full w-10 h-10 bg-zinc-600" />
+      <div className="flex-1 hidden md:block">
+        <Skeleton className="h-5 bg-zinc-600" />
+      </div>
+    </div>
+  );
+};

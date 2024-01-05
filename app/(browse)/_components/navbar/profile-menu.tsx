@@ -35,12 +35,12 @@ const ProfileMenu = (props: ProfileMenuProps) => {
                 SA
               </AvatarFallback>
             </Avatar>
-            <div className="flex flex-col space-y-1">
-              <p className="text-sm">
+            <div className="flex flex-col space-y-1 overflow-hidden">
+              <p className="text-sm truncate">
                 {/* {user?.name} */}
                 Shaqeeb Akhtar
               </p>
-              <p className="text-xs leading-none">
+              <p className="text-xs leading-none truncate">
                 {/* {user?.email} */}
                 shaqeeb@gmail.com
               </p>

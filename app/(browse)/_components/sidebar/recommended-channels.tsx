@@ -1,6 +1,6 @@
 'use client';
 import { User } from '@prisma/client';
-import Channel from './channel';
+import Channel, { ChannelSkeleton } from './channel';
 import { useSidebar } from '@/store/use-sidebar';
 
 type RecommendedChannelsProps = {
@@ -34,3 +34,13 @@ const RecommendedChannels = ({ channels }: RecommendedChannelsProps) => {
 };
 
 export default RecommendedChannels;
+
+export const RecommendedChannelsSkeleton = () => {
+  return (
+    <>
+      {[...Array(6)].map((_, i) => (
+        <ChannelSkeleton key={i} />
+      ))}
+    </>
+  );
+};

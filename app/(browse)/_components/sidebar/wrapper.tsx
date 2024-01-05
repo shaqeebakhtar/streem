@@ -2,9 +2,14 @@
 import { cn } from '@/lib/utils';
 import { useSidebar } from '@/store/use-sidebar';
 import React from 'react';
+import { useIsClient } from 'usehooks-ts';
+import { SidebarSkeleton } from '.';
 
 const Wrapper = ({ children }: { children: React.ReactNode }) => {
   const { collapsed } = useSidebar((state) => state);
+  const isClient = useIsClient();
+
+  if (!isClient) return <SidebarSkeleton />;
 
   return (
     <aside
