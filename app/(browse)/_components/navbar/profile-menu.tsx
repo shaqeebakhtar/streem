@@ -1,4 +1,4 @@
-import { Avatar, AvatarFallback } from '@/components/ui/avatar';
+import ChannelAvatar from '@/components/channel-avatar';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -9,59 +9,59 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { LayoutDashboard, LogOut, Settings } from 'lucide-react';
+import { getCurrentUser } from '@/services/user';
+import { LayoutDashboard, LogOut, Settings2, Tv } from 'lucide-react';
+import Link from 'next/link';
+import LogoutButton from './logout-button';
 
-type ProfileMenuProps = {};
+const ProfileMenu = async () => {
+  const user = await getCurrentUser();
 
-const ProfileMenu = (props: ProfileMenuProps) => {
   return (
     <>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant="ghost" className="relative h-8 w-8 rounded-full">
-            <Avatar className="h-9 w-9">
-              <AvatarFallback className="font-semibold bg-zinc-700">
-                {/* {getInitials(user?.email?.split('@')[0] as string)} */}
-                SA
-              </AvatarFallback>
-            </Avatar>
+            <ChannelAvatar
+              imageUrl={user.image || ''}
+              username={user.username}
+            />
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="w-56 font-medium" align="end">
           <DropdownMenuLabel className="flex items-center space-x-2 py-3">
-            <Avatar className="h-9 w-9">
-              <AvatarFallback className="font-semibold">
-                {/* {getInitials(user?.email?.split('@')[0] as string)} */}
-                SA
-              </AvatarFallback>
-            </Avatar>
+            <ChannelAvatar
+              imageUrl={user.image || ''}
+              username={user.username}
+            />
             <div className="flex flex-col space-y-1 overflow-hidden">
-              <p className="text-sm truncate">
-                {/* {user?.name} */}
-                Shaqeeb Akhtar
-              </p>
-              <p className="text-xs leading-none truncate">
-                {/* {user?.email} */}
-                shaqeeb@gmail.com
-              </p>
+              <p className="text-sm truncate">{user.username}</p>
+              <p className="text-xs leading-none truncate">{user?.email}</p>
             </div>
           </DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuGroup>
-            <DropdownMenuItem>
-              <LayoutDashboard className="w-4 h-4 mr-2" />
-              Creator Dashboard
-            </DropdownMenuItem>
-            <DropdownMenuItem>
-              <Settings className="w-4 h-4 mr-2" />
-              Settings
-            </DropdownMenuItem>
+            <Link href={`/${user.username}`}>
+              <DropdownMenuItem>
+                <Tv className="w-4 h-4 mr-2" />
+                Channel
+              </DropdownMenuItem>
+            </Link>
+            <Link href={`/u/${user.username}`}>
+              <DropdownMenuItem>
+                <LayoutDashboard className="w-4 h-4 mr-2" />
+                Creator Dashboard
+              </DropdownMenuItem>
+            </Link>
+            <Link href="/settings">
+              <DropdownMenuItem>
+                <Settings2 className="w-4 h-4 mr-2" />
+                Settings
+              </DropdownMenuItem>
+            </Link>
           </DropdownMenuGroup>
           <DropdownMenuSeparator />
-          <DropdownMenuItem>
-            <LogOut className="w-4 h-4 mr-2 rotate-180" />
-            Log out
-          </DropdownMenuItem>
+          <LogoutButton />
         </DropdownMenuContent>
       </DropdownMenu>
     </>

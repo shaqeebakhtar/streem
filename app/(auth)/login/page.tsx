@@ -1,13 +1,18 @@
-import Link from 'next/link';
-import GoogleAuthButton from '../_components/google-auth-button';
-import { getServerSession } from 'next-auth';
-import { redirect } from 'next/navigation';
 import { Icons } from '@/components/icons';
+import { authOptions } from '@/lib/auth-options';
+import { getServerSession } from 'next-auth';
+import Link from 'next/link';
+import { redirect } from 'next/navigation';
+import GoogleAuthButton from '../_components/google-auth-button';
 
 const Login = async () => {
-  const session = await getServerSession();
+  const session = await getServerSession(authOptions);
 
-  if (session && session.user) {
+  if (session?.user && !session.user.username) {
+    redirect('/choose/username');
+  }
+
+  if (session?.user) {
     redirect('/');
   }
 
