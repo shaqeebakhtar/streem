@@ -23,18 +23,43 @@ model Account {
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
   @@unique([provider, providerAccountId])
 }
 
 model User {
   id            String    @id @default(cuid())
   username      String?   @unique
+  channelName   String?
   bio           String?   @db.Text
   name          String?
   email         String?   @unique
   emailVerified DateTime?
   image         String?
   accounts      Account[]
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
+
+  followers Follow[] @relation("FollowedBy")
+  following Follow[] @relation("Following")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Follow {
+  id String @id @default(cuid())
+
+  follower   User   @relation(name: "FollowedBy", fields: [followerId], references: [id], onDelete: Cascade)
+  followerId String
+
+  following   User   @relation(name: "Following", fields: [followingId], references: [id], onDelete: Cascade)
+  followingId String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([followerId, followingId])
+  @@index([followerId])
+  @@index([followingId])
 }

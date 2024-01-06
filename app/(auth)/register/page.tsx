@@ -8,7 +8,7 @@ const Register = async () => {
   const session = await getServerSession();
 
   if (session && session.user) {
-    redirect('/dashboard');
+    redirect('/');
   }
 
   return (
@@ -23,7 +23,7 @@ const Register = async () => {
         </div>
       </div>
       <div className="flex flex-col space-y-3 px-8 py-8 sm:px-16 bg-zinc-900/30">
-        <GoogleAuthButton />
+        <GoogleAuthButton isRegister={true} />
         <p className="text-center text-sm text-muted-foreground">
           Already have an account?{' '}
           <Link

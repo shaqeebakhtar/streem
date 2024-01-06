@@ -6,12 +6,24 @@ import { signIn } from 'next-auth/react';
 import { useSearchParams } from 'next/navigation';
 import React from 'react';
 
-const GoogleAuthButton = () => {
+type GoogleAuthButtonProps = {
+  isRegister?: boolean;
+};
+
+const GoogleAuthButton = ({ isRegister }: GoogleAuthButtonProps) => {
   const searchParams = useSearchParams();
   const redirectUrl = searchParams.get('redirect_url');
 
+  const callbackUrl = isRegister
+    ? '/choose/username'
+    : redirectUrl
+    ? redirectUrl
+    : '/';
+
+  console.log(callbackUrl);
+
   const handleSignin = () => {
-    signIn('google', { callbackUrl: redirectUrl as string });
+    signIn('google', { callbackUrl: callbackUrl });
   };
 
   return (

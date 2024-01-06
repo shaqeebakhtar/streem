@@ -23,7 +23,10 @@ export const authOptions: AuthOptions = {
         },
       });
 
-      if (user) token.id = user.id;
+      if (user) {
+        token.id = user.id;
+        token.username = user.username;
+      }
 
       return token;
     },
@@ -31,6 +34,7 @@ export const authOptions: AuthOptions = {
     session: async ({ session, token }) => {
       if (session?.user) {
         session.user.id = token.id as string;
+        session.user.username = token.username as string;
       }
 
       return session;

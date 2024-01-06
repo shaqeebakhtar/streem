@@ -11,7 +11,7 @@ const Actions = async () => {
 
   return (
     <>
-      {!!session?.user && (
+      {!session?.user && (
         <div className="space-x-2">
           <Button
             asChild
@@ -26,7 +26,7 @@ const Actions = async () => {
           </Button>
         </div>
       )}
-      {!session?.user && (
+      {session?.user && (
         <div className="flex items-center space-x-4">
           <Hint asChild label={'Notifications'}>
             <Button
