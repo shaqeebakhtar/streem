@@ -18,13 +18,13 @@ export const getFollowedChannels = async () => {
   }
 };
 
-export const followChannel = async (id: string) => {
+export const followChannel = async (channelId: string) => {
   const currentUser = await getCurrentUser();
 
   const followed = await db.follow.create({
     data: {
       followerId: currentUser.id,
-      followingId: id,
+      followingId: channelId,
     },
     include: {
       following: true,
@@ -34,14 +34,14 @@ export const followChannel = async (id: string) => {
   return followed;
 };
 
-export const unfollowChannel = async (id: string) => {
+export const unfollowChannel = async (channelId: string) => {
   const currentUser = await getCurrentUser();
 
   const following = await db.follow.findUnique({
     where: {
       followerId_followingId: {
         followerId: currentUser.id,
-        followingId: id,
+        followingId: channelId,
       },
     },
   });
@@ -60,14 +60,14 @@ export const unfollowChannel = async (id: string) => {
   return unfollowed;
 };
 
-export const findFollowing = async (id: string) => {
+export const findFollowing = async (channelId: string) => {
   const currentUser = await getCurrentUser();
 
   const following = await db.follow.findUnique({
     where: {
       followerId_followingId: {
         followerId: currentUser.id,
-        followingId: id,
+        followingId: channelId,
       },
     },
   });
