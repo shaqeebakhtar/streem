@@ -1,10 +1,10 @@
 'use client';
-import { User } from '@prisma/client';
+import { type Channel as TChannel } from '@prisma/client';
 import Channel, { ChannelSkeleton } from './channel';
 import { useSidebar } from '@/store/use-sidebar';
 
 type RecommendedChannelsProps = {
-  channels: User[];
+  channels: TChannel[];
 };
 
 const RecommendedChannels = ({ channels }: RecommendedChannelsProps) => {

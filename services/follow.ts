@@ -3,13 +3,13 @@ import db from '@/lib/db';
 import { revalidatePath } from 'next/cache';
 import { getCurrentUser } from './user';
 
-export const followUser = async (id: string) => {
+export const followChannel = async (channelId: string) => {
   const currentUser = await getCurrentUser();
 
   const followed = await db.follow.create({
     data: {
       followerId: currentUser.id,
-      followingId: id,
+      followingId: channelId,
     },
   });
 
@@ -18,14 +18,14 @@ export const followUser = async (id: string) => {
   return followed;
 };
 
-export const unfollowUser = async (id: string) => {
+export const unfollowChannel = async (channelId: string) => {
   const currentUser = await getCurrentUser();
 
   const following = await db.follow.findUnique({
     where: {
       followerId_followingId: {
         followerId: currentUser.id,
-        followingId: id,
+        followingId: channelId,
       },
     },
   });
@@ -43,14 +43,14 @@ export const unfollowUser = async (id: string) => {
   return unfollowed;
 };
 
-export const findFollowing = async (id: string) => {
+export const findFollowing = async (channelId: string) => {
   const currentUser = await getCurrentUser();
 
   const following = await db.follow.findUnique({
     where: {
       followerId_followingId: {
         followerId: currentUser.id,
-        followingId: id,
+        followingId: channelId,
       },
     },
   });

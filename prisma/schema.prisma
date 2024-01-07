@@ -21,7 +21,7 @@ model Account {
   id_token          String? @db.Text
   session_state     String?
 
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user Channel @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -29,7 +29,7 @@ model Account {
   @@unique([provider, providerAccountId])
 }
 
-model User {
+model Channel {
   id            String    @id @default(cuid())
   username      String?   @unique
   channelName   String?
@@ -50,10 +50,10 @@ model User {
 model Follow {
   id String @id @default(cuid())
 
-  follower   User   @relation(name: "FollowedBy", fields: [followerId], references: [id], onDelete: Cascade)
+  follower   Channel @relation(name: "FollowedBy", fields: [followerId], references: [id], onDelete: Cascade)
   followerId String
 
-  following   User   @relation(name: "Following", fields: [followingId], references: [id], onDelete: Cascade)
+  following   Channel @relation(name: "Following", fields: [followingId], references: [id], onDelete: Cascade)
   followingId String
 
   createdAt DateTime @default(now())

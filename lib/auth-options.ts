@@ -17,15 +17,15 @@ export const authOptions: AuthOptions = {
   },
   callbacks: {
     jwt: async ({ token }) => {
-      const user = await db.user.findFirst({
+      const channel = await db.channel.findFirst({
         where: {
           email: token?.email,
         },
       });
 
-      if (user) {
-        token.id = user.id;
-        token.username = user.username;
+      if (channel) {
+        token.id = channel.id;
+        token.username = channel.username;
       }
 
       return token;
