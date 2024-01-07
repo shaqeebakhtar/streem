@@ -17,7 +17,7 @@ export const authOptions: AuthOptions = {
   },
   callbacks: {
     jwt: async ({ token }) => {
-      const channel = await db.channel.findFirst({
+      const channel = await db.user.findFirst({
         where: {
           email: token?.email,
         },
