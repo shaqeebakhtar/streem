@@ -4,15 +4,19 @@ import Toggle from './toggle';
 import RecommendedChannels, {
   RecommendedChannelsSkeleton,
 } from './recommended-channels';
-import { getRecommendedChannels } from '@/data-access/get-recommended-channels';
+import FollowedChannels from './followed-channels';
+import { getRecommendedChannels } from '@/services/recommendation';
+import { getFollowedChannels } from '@/services/follow';
 
 const Sidebar = async () => {
-  const channels = await getRecommendedChannels();
+  const recommendedchannels = await getRecommendedChannels();
+  const followedChannels = await getFollowedChannels();
 
   return (
     <Wrapper>
       <Toggle />
-      <RecommendedChannels channels={channels} />
+      <FollowedChannels channels={followedChannels} />
+      <RecommendedChannels channels={recommendedchannels} />
     </Wrapper>
   );
 };

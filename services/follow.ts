@@ -1,9 +1,24 @@
-'use server';
 import db from '@/lib/db';
-import { revalidatePath } from 'next/cache';
 import { getCurrentUser } from './user';
 
-export const followUser = async (id: string) => {
+export const getFollowedChannels = async () => {
+  try {
+    const user = await getCurrentUser();
+
+    return await db.follow.findMany({
+      where: {
+        followerId: user.id,
+      },
+      include: {
+        following: true,
+      },
+    });
+  } catch (error) {
+    return [];
+  }
+};
+
+export const followChannel = async (id: string) => {
   const currentUser = await getCurrentUser();
 
   const followed = await db.follow.create({
@@ -11,14 +26,15 @@ export const followUser = async (id: string) => {
       followerId: currentUser.id,
       followingId: id,
     },
+    include: {
+      following: true,
+    },
   });
-
-  if (followed) revalidatePath('/');
 
   return followed;
 };
 
-export const unfollowUser = async (id: string) => {
+export const unfollowChannel = async (id: string) => {
   const currentUser = await getCurrentUser();
 
   const following = await db.follow.findUnique({
@@ -36,9 +52,10 @@ export const unfollowUser = async (id: string) => {
     where: {
       id: following.id,
     },
+    include: {
+      following: true,
+    },
   });
-
-  if (unfollowed) revalidatePath('/');
 
   return unfollowed;
 };

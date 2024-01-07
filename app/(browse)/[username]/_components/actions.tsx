@@ -2,8 +2,8 @@
 import { Icons } from '@/components/icons';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
-import { followUser, unfollowUser } from '@/services/follow';
 import { useTransition } from 'react';
+import { onFollowChannel, onUnfollowChannel } from '../actions/follow';
 
 type ActionsProps = {
   isFollowing: boolean;
@@ -13,15 +13,15 @@ type ActionsProps = {
 const Actions = ({ isFollowing, channelId }: ActionsProps) => {
   const [isPending, startTransition] = useTransition();
 
-  const handleFollowUser = () => {
+  const handleFollowChannel = () => {
     startTransition(() => {
-      followUser(channelId);
+      onFollowChannel(channelId);
     });
   };
 
-  const handleUnfollowUser = () => {
+  const handleUnfollowChannel = () => {
     startTransition(() => {
-      unfollowUser(channelId);
+      onUnfollowChannel(channelId);
     });
   };
 
@@ -32,7 +32,7 @@ const Actions = ({ isFollowing, channelId }: ActionsProps) => {
         isFollowing && 'bg-zinc-700 hover:bg-zinc-600'
       )}
       disabled={isPending}
-      onClick={isFollowing ? handleUnfollowUser : handleFollowUser}
+      onClick={isFollowing ? handleUnfollowChannel : handleFollowChannel}
     >
       {isFollowing ? 'Unfollow' : 'Follow'}
       {isPending && <Icons.spinner className="w-4 h-4 ml-2 animate-spin" />}

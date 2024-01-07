@@ -50,10 +50,10 @@ model User {
 model Follow {
   id String @id @default(cuid())
 
-  follower   User   @relation(name: "FollowedBy", fields: [followerId], references: [id], onDelete: Cascade)
+  follower   User   @relation(name: "Following", fields: [followerId], references: [id], onDelete: Cascade)
   followerId String
 
-  following   User   @relation(name: "Following", fields: [followingId], references: [id], onDelete: Cascade)
+  following   User   @relation(name: "FollowedBy", fields: [followingId], references: [id], onDelete: Cascade)
   followingId String
 
   createdAt DateTime @default(now())

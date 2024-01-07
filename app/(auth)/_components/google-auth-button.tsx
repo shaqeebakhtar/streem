@@ -20,8 +20,6 @@ const GoogleAuthButton = ({ isRegister }: GoogleAuthButtonProps) => {
     ? redirectUrl
     : '/';
 
-  console.log(callbackUrl);
-
   const handleSignin = () => {
     signIn('google', { callbackUrl: callbackUrl });
   };

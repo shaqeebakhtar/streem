@@ -39,8 +39,6 @@ const ChooseUsernameForm = () => {
   };
 
   const checkUsername = async (input: z.infer<typeof UsernameFormSchema>) => {
-    console.log('checking');
-
     startUsernameTransition(async () => {
       const usernameTaken = !!(await findUsername(input.username));
 
