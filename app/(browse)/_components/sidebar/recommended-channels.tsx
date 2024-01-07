@@ -22,8 +22,8 @@ const RecommendedChannels = ({ channels }: RecommendedChannelsProps) => {
           return (
             <Channel
               key={channel.id}
-              username={'shaqeebakhtar'}
-              imageUrl={''}
+              username={channel.username!}
+              imageUrl={channel.image || ''}
               isLive={false}
             />
           );

@@ -16,10 +16,10 @@ export const authOptions: AuthOptions = {
     strategy: 'jwt',
   },
   callbacks: {
-    jwt: async ({ token, profile }) => {
+    jwt: async ({ token }) => {
       const user = await db.user.findFirst({
         where: {
-          email: profile?.email,
+          email: token?.email,
         },
       });
 

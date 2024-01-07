@@ -32,3 +32,13 @@ export const createChannel = async (username: string) => {
     throw error;
   }
 };
+
+export const findChannelByUsername = async (username: string) => {
+  const channel = await db.user.findUnique({
+    where: {
+      username,
+    },
+  });
+
+  return channel;
+};
