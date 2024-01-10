@@ -3,6 +3,7 @@ import { findFollowing } from '@/services/follow';
 import { notFound } from 'next/navigation';
 import React from 'react';
 import Actions from './_components/actions';
+import { findBlocked, findIMBlocked } from '@/services/block';
 
 type ChannelUserNameProps = {
   params: {
@@ -20,13 +21,22 @@ const ChannelUserName = async ({
   }
 
   const isFollowing = !!(await findFollowing(channel.id));
+  const isBlocked = !!(await findBlocked(channel.id));
+  const isIMBlockedByChannel = !!(await findIMBlocked(channel.id));
+
+  if (isIMBlockedByChannel) notFound();
 
   return (
     <div>
       <p>id: {channel.id}</p>
       <p>username: {channel.username}</p>
       <p>Channel Name: {channel.channelName}</p>
-      <Actions isFollowing={isFollowing} channelId={channel.id} />
+      <p>Is Blocked: {`${isIMBlockedByChannel}`}</p>
+      <Actions
+        isFollowing={isFollowing}
+        isBlocked={isBlocked}
+        channelId={channel.id}
+      />
     </div>
   );
 };

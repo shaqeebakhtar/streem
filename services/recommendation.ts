@@ -21,6 +21,24 @@ export const getRecommendedChannels = async () => {
             },
           },
         },
+        {
+          NOT: {
+            blocker: {
+              some: {
+                blockerId: user.id,
+              },
+            },
+          },
+        },
+        {
+          NOT: {
+            blocking: {
+              some: {
+                blockingId: user.id,
+              },
+            },
+          },
+        },
       ],
     },
   });

@@ -1,5 +1,5 @@
 'use client';
-import { type Channel as TChannel } from '@prisma/client';
+import { type User as TChannel } from '@prisma/client';
 import Channel, { ChannelSkeleton } from './channel';
 import { useSidebar } from '@/store/use-sidebar';
 
