@@ -2,6 +2,7 @@
 import { type User as TChannel } from '@prisma/client';
 import Channel, { ChannelSkeleton } from './channel';
 import { useSidebar } from '@/store/use-sidebar';
+import { Video } from 'lucide-react';
 
 type RecommendedChannelsProps = {
   channels: TChannel[];
@@ -16,6 +17,11 @@ const RecommendedChannels = ({ channels }: RecommendedChannelsProps) => {
         <p className="p-2 uppercase font-semibold text-sm tracking-wide">
           Recommended Channels
         </p>
+      )}
+      {collapsed && channels.length > 0 && (
+        <span className="inline-flex items-center px-4 w-full opacity-70">
+          <Video className="w-5 h-5" />
+        </span>
       )}
       <div>
         {channels.map((channel) => {
