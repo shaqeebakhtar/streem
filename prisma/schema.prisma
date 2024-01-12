@@ -46,6 +46,8 @@ model User {
   blocker  Block[] @relation("BlockerBy")
   blocking Block[] @relation("Blocker")
 
+  stream Stream?
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -79,4 +81,29 @@ model Block {
   @@unique([blockerId, blockingId])
   @@index([blockerId])
   @@index([blockingId])
+}
+
+model Stream {
+  id String @id @default(cuid())
+
+  name         String  @db.Text
+  thumbnailUrl String? @db.Text
+
+  ingressId String? @unique
+  serverUrl String? @db.Text
+  streamKey String? @db.Text
+
+  isLive              Boolean @default(false)
+  isChatEnabled       Boolean @default(true)
+  isChatDelayed       Boolean @default(false)
+  isChatFollowersOnly Boolean @default(false)
+
+  userId String @unique
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+  @@index([ingressId])
 }

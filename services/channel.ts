@@ -24,6 +24,11 @@ export const createChannel = async (username: string) => {
       data: {
         username,
         channelName: username,
+        stream: {
+          create: {
+            name: `${username}'s stream`,
+          },
+        },
       },
     });
 
