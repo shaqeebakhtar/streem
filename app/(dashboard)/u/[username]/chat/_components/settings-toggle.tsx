@@ -30,7 +30,7 @@ const SettingsToggle = ({
   return (
     <div
       className={cn(
-        'grid grid-cols-2 lg:grid-cols-5 items-center px-4 py-6 bg-zinc-800',
+        'grid grid-cols-2 lg:grid-cols-5 items-center px-4 py-6 bg-zinc-900',
         className
       )}
     >
