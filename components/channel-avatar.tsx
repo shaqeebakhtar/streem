@@ -34,7 +34,7 @@ const ChannelAvatar = ({
     <div className="relative">
       <Avatar
         className={cn(
-          isLive && 'ring-2 ring-red-600',
+          isLive && 'ring-2 ring-red-600 border border-zinc-900',
           avatarVariants({ size })
         )}
       >

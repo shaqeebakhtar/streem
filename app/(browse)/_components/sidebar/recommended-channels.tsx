@@ -1,11 +1,11 @@
 'use client';
-import { type User as TChannel } from '@prisma/client';
+import { Stream, type User as TChannel } from '@prisma/client';
 import Channel, { ChannelSkeleton } from './channel';
 import { useSidebar } from '@/store/use-sidebar';
 import { Video } from 'lucide-react';
 
 type RecommendedChannelsProps = {
-  channels: TChannel[];
+  channels: (TChannel & { stream: Stream | null })[];
 };
 
 const RecommendedChannels = ({ channels }: RecommendedChannelsProps) => {
@@ -30,7 +30,7 @@ const RecommendedChannels = ({ channels }: RecommendedChannelsProps) => {
               key={channel.id}
               username={channel.username!}
               imageUrl={channel.image || ''}
-              isLive={false}
+              isLive={channel.stream?.isLive}
             />
           );
         })}

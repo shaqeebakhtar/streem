@@ -35,7 +35,7 @@ const Channel = ({ username, imageUrl, isLive }: ChannelProps) => {
           <ChannelAvatar
             imageUrl={imageUrl}
             username={username}
-            isLive={false}
+            isLive={isLive}
             showLiveBadge={false}
           />
           {!collapsed && <p className="font-semibold truncate">{username}</p>}

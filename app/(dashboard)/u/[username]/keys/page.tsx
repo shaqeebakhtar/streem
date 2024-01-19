@@ -17,11 +17,11 @@ const Keys = async () => {
       <div className="w-full max-w-5xl space-y-4">
         <h3 className="font-semibold text-lg">Stream Key & Server Url</h3>
         <div className="overflow-hidden rounded-lg border border-zinc-600">
-          <StreamKey
+          <ServerUrl
             className="border-b border-zinc-600"
-            streamKey={stream?.streamKey}
+            serverUrl={stream?.serverUrl}
           />
-          <ServerUrl serverUrl={stream?.serverUrl} />
+          <StreamKey streamKey={stream?.streamKey} />
           <GenerateConnection />
         </div>
       </div>

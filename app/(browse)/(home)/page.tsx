@@ -5,7 +5,7 @@ import { redirect } from 'next/navigation';
 const Home = async () => {
   const session = await getServerSession(authOptions);
 
-  if (!session?.user.username) {
+  if (session?.user && !session?.user.username) {
     redirect('/choose/username');
   }
 

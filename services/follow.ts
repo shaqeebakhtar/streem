@@ -17,7 +17,11 @@ export const getFollowedChannels = async () => {
         },
       },
       include: {
-        following: true,
+        following: {
+          include: {
+            stream: true,
+          },
+        },
       },
     });
   } catch (error) {

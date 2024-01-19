@@ -6,7 +6,7 @@ import React from 'react';
 
 const LogoutButton = () => {
   return (
-    <DropdownMenuItem onClick={() => signOut({ callbackUrl: '/login' })}>
+    <DropdownMenuItem onClick={() => signOut({ callbackUrl: '/' })}>
       <LogOut className="w-4 h-4 mr-2 rotate-180" />
       Log out
     </DropdownMenuItem>

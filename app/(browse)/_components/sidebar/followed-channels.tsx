@@ -1,12 +1,12 @@
 'use client';
-import { Follow, type User as TChannel } from '@prisma/client';
+import { Follow, Stream, type User as TChannel } from '@prisma/client';
 import { useSidebar } from '@/store/use-sidebar';
 import React from 'react';
 import Channel from './channel';
 import { UserCheck } from 'lucide-react';
 
 type FollowedChannelsProps = {
-  channels: (Follow & { following: TChannel })[];
+  channels: (Follow & { following: TChannel & { stream: Stream | null } })[];
 };
 
 const FollowedChannels = ({ channels }: FollowedChannelsProps) => {
@@ -31,7 +31,7 @@ const FollowedChannels = ({ channels }: FollowedChannelsProps) => {
               key={channel.following.id}
               username={channel.following.username!}
               imageUrl={channel.following.image || ''}
-              isLive={false}
+              isLive={channel.following.stream?.isLive}
             />
           );
         })}
