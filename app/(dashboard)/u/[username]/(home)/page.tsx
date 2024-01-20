@@ -27,7 +27,7 @@ const Dashboard = async ({ params }: DashboardProps) => {
       channel={channel}
       stream={channel.stream}
       isFollowing={true}
-      isOwner={true}
+      isStreamOwner={true}
     />
   );
 };

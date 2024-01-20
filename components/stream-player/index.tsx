@@ -3,12 +3,13 @@
 import { useViewerToken } from '@/hooks/use-viewer-token';
 import { LiveKitRoom } from '@livekit/components-react';
 import { Stream, User } from '@prisma/client';
+import VideoPlayer from './video-player';
 
 type StreamPlayerProps = {
   stream: Stream;
   channel: User;
   isFollowing: boolean;
-  isOwner?: boolean;
+  isStreamOwner?: boolean;
 };
 
 const StreamPlayer = ({ channel }: StreamPlayerProps) => {
@@ -23,7 +24,14 @@ const StreamPlayer = ({ channel }: StreamPlayerProps) => {
   return (
     <div>
       <LiveKitRoom token={token} serverUrl={SERVER_URL}>
-        StreamPlayer
+        <div>
+          <div className="w-full">
+            <VideoPlayer
+              hostName={channel.username!}
+              hostIdentity={channel.id}
+            />
+          </div>
+        </div>
       </LiveKitRoom>
     </div>
   );
