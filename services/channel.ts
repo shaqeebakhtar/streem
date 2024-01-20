@@ -43,6 +43,22 @@ export const findChannelByUsername = async (username: string) => {
     where: {
       username,
     },
+    include: {
+      stream: true,
+    },
+  });
+
+  return channel;
+};
+
+export const findChannelById = async (id: string) => {
+  const channel = await db.user.findUnique({
+    where: {
+      id,
+    },
+    include: {
+      stream: true,
+    },
   });
 
   return channel;
