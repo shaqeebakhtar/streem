@@ -19,7 +19,7 @@ const ChatSettings = async () => {
         <SettingsToggle
           className="border-b border-zinc-600"
           field="isChatEnabled"
-          label="Disable Chat"
+          label="Enable Chat"
           value={stream?.isChatEnabled!}
         />
         <SettingsToggle
