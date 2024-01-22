@@ -8,7 +8,7 @@ const LiveBadge = ({ className }: LiveBadgeProps) => {
     <div
       className={cn(
         className,
-        'bg-red-600 text-center rounded-sm pt-1.5 pb-1 w-12'
+        'bg-red-600 text-center rounded-sm pt-1.5 pb-1 w-10'
       )}
     >
       <p className="text-xs font-semibold uppercase leading-none">Live</p>

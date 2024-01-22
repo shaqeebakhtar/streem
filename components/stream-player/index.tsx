@@ -1,13 +1,14 @@
 'use client';
 
 import { useViewerToken } from '@/hooks/use-viewer-token';
+import { cn } from '@/lib/utils';
+import { useChatSidebar } from '@/store/use-chat-sidebar';
 import { LiveKitRoom } from '@livekit/components-react';
 import { Stream, User } from '@prisma/client';
-import VideoPlayer, { VideoPlayerSkeleton } from './video-player';
-import { useChatSidebar } from '@/store/use-chat-sidebar';
-import { cn } from '@/lib/utils';
 import Chat, { ChatSkeleton } from './chat';
 import ChatToggle from './chat-toggle';
+import Header, { HeaderSkeleton } from './header';
+import VideoPlayer, { VideoPlayerSkeleton } from './video-player';
 
 type StreamPlayerProps = {
   stream: Stream;
@@ -45,6 +46,14 @@ const StreamPlayer = ({ channel, isFollowing, stream }: StreamPlayerProps) => {
               hostName={channel.username!}
               hostIdentity={channel.id}
             />
+            <Header
+              hostName={channel.username!}
+              hostIdentity={channel.id}
+              viewerIdentity={identity}
+              imageUrl={channel.image!}
+              isFollowing={isFollowing}
+              name={stream.name}
+            />
           </div>
           <div className={cn('col-span-1', collapsed && 'hidden')}>
             <Chat
@@ -70,6 +79,7 @@ export const StreamPlayerSkeleton = () => {
     <div className="grid grid-cols-1 lg:grid-cols-3">
       <div className="col-span-2">
         <VideoPlayerSkeleton />
+        <HeaderSkeleton />
       </div>
       <div className="col-span-1">
         <ChatSkeleton />
