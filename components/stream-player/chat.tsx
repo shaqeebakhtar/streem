@@ -7,9 +7,9 @@ import {
 import { ConnectionState } from 'livekit-client';
 import React, { useEffect, useMemo, useState } from 'react';
 import { useMediaQuery } from 'usehooks-ts';
-import ChatHeader from './chat-header';
-import ChatInput from './chat-input';
-import MessagesList from './messages-list';
+import ChatHeader, { ChatHeaderSkeleton } from './chat-header';
+import ChatInput, { ChatInputSkeleton } from './chat-input';
+import MessagesList, { MessagesListSkeleton } from './messages-list';
 import ChatCommunity from './chat-community';
 
 type ChatProps = {
@@ -96,3 +96,13 @@ const Chat = ({
 };
 
 export default Chat;
+
+export const ChatSkeleton = () => {
+  return (
+    <div className="bg-zinc-900 h-[calc(100vh-54px)] flex flex-col pb-3">
+      <ChatHeaderSkeleton />
+      <MessagesListSkeleton />
+      <ChatInputSkeleton />
+    </div>
+  );
+};

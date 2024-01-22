@@ -3,10 +3,10 @@
 import { useViewerToken } from '@/hooks/use-viewer-token';
 import { LiveKitRoom } from '@livekit/components-react';
 import { Stream, User } from '@prisma/client';
-import VideoPlayer from './video-player';
+import VideoPlayer, { VideoPlayerSkeleton } from './video-player';
 import { useChatSidebar } from '@/store/use-chat-sidebar';
 import { cn } from '@/lib/utils';
-import Chat from './chat';
+import Chat, { ChatSkeleton } from './chat';
 import ChatToggle from './chat-toggle';
 
 type StreamPlayerProps = {
@@ -21,7 +21,7 @@ const StreamPlayer = ({ channel, isFollowing, stream }: StreamPlayerProps) => {
   const { collapsed } = useChatSidebar((state) => state);
 
   if (!token || !name || !identity) {
-    return <div>Can&apos;t view Stream</div>;
+    return <StreamPlayerSkeleton />;
   }
 
   const SERVER_URL = process.env.NEXT_PUBLIC_LIVEKIT_URL;
@@ -64,3 +64,16 @@ const StreamPlayer = ({ channel, isFollowing, stream }: StreamPlayerProps) => {
 };
 
 export default StreamPlayer;
+
+export const StreamPlayerSkeleton = () => {
+  return (
+    <div className="grid grid-cols-1 lg:grid-cols-3">
+      <div className="col-span-2">
+        <VideoPlayerSkeleton />
+      </div>
+      <div className="col-span-1">
+        <ChatSkeleton />
+      </div>
+    </div>
+  );
+};

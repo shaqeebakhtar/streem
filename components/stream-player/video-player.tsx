@@ -9,6 +9,7 @@ import { ReactNode } from 'react';
 import Offline from './offline';
 import VideoLoading from './video-loading';
 import LiveVideo from './live-video';
+import { Skeleton } from '../ui/skeleton';
 
 type VideoPlayerProps = {
   hostName: string;
@@ -37,3 +38,11 @@ const VideoPlayer = ({ hostName, hostIdentity }: VideoPlayerProps) => {
 };
 
 export default VideoPlayer;
+
+export const VideoPlayerSkeleton = () => {
+  return (
+    <div className="aspect-video">
+      <Skeleton className="w-full h-full bg-zinc-800" />
+    </div>
+  );
+};

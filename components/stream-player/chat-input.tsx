@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Input } from '../ui/input';
 import { Button } from '../ui/button';
 import ChatInfo from './chat-info';
+import { Skeleton } from '../ui/skeleton';
 
 type ChatInputProps = {
   onChange: (value: string) => void;
@@ -68,3 +69,15 @@ const ChatInput = ({
 };
 
 export default ChatInput;
+
+export const ChatInputSkeleton = () => {
+  return (
+    <div className="p-2 space-y-2">
+      <Skeleton className="w-full h-10 bg-zinc-800" />
+      <div className="flex items-center gap-2">
+        <Skeleton className="w-full h-10 bg-zinc-800" />
+        <Skeleton className="w-12 h-10 bg-zinc-800" />
+      </div>
+    </div>
+  );
+};
