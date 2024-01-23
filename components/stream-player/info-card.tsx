@@ -22,7 +22,7 @@ const InfoCard = ({
   if (!isHost) return null;
 
   return (
-    <div className="m-3 bg-zinc-800 rounded-lg">
+    <div className="m-3 bg-zinc-900 rounded-lg">
       <div className="flex items-center gap-3 p-4">
         <div className="p-2 rounded bg-primary">
           <Pencil className="w-5 h-5" />

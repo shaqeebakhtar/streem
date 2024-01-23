@@ -45,6 +45,11 @@ export const findChannelByUsername = async (username: string) => {
     },
     include: {
       stream: true,
+      _count: {
+        select: {
+          followers: true,
+        },
+      },
     },
   });
 

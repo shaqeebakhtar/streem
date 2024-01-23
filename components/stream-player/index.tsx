@@ -10,10 +10,14 @@ import ChatToggle from './chat-toggle';
 import Header, { HeaderSkeleton } from './header';
 import VideoPlayer, { VideoPlayerSkeleton } from './video-player';
 import InfoCard from './info-card';
+import AboutCard from './about-card';
 
 type StreamPlayerProps = {
   stream: Stream;
-  channel: User;
+  channel: User & {
+    stream: Stream | null;
+    _count: { followers: number };
+  };
   isFollowing: boolean;
   isStreamOwner?: boolean;
 };
@@ -60,6 +64,13 @@ const StreamPlayer = ({ channel, isFollowing, stream }: StreamPlayerProps) => {
               viewerIdentity={identity}
               name={stream.name}
               thumbnailUrl={stream.thumbnailUrl}
+            />
+            <AboutCard
+              hostName={channel.username!}
+              hostIdentity={channel.id}
+              viewerIdentity={identity}
+              bio={channel.bio}
+              followersCount={channel._count.followers}
             />
           </div>
           <div className={cn('col-span-1', collapsed && 'hidden')}>
