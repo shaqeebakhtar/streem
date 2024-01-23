@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation';
 import React from 'react';
 import Actions from './_components/actions';
 import { findBlocked, findIMBlocked } from '@/services/block';
+import StreamPlayer from '@/components/stream-player';
 
 type ChannelUserNameProps = {
   params: {
@@ -16,7 +17,7 @@ const ChannelUserName = async ({
 }: ChannelUserNameProps) => {
   const channel = await findChannelByUsername(username);
 
-  if (!channel) {
+  if (!channel || !channel.stream) {
     notFound();
   }
 
@@ -27,17 +28,11 @@ const ChannelUserName = async ({
   if (isIMBlockedByChannel) notFound();
 
   return (
-    <div>
-      <p>id: {channel.id}</p>
-      <p>username: {channel.username}</p>
-      <p>Channel Name: {channel.channelName}</p>
-      <p>Is Blocked: {`${isIMBlockedByChannel}`}</p>
-      <Actions
-        isFollowing={isFollowing}
-        isBlocked={isBlocked}
-        channelId={channel.id}
-      />
-    </div>
+    <StreamPlayer
+      channel={channel}
+      stream={channel.stream}
+      isFollowing={isFollowing}
+    />
   );
 };
 

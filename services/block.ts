@@ -2,33 +2,41 @@ import db from '@/lib/db';
 import { getCurrentUser } from './user';
 
 export const findBlocked = async (channelId: string) => {
-  const user = await getCurrentUser();
+  try {
+    const user = await getCurrentUser();
 
-  const blocked = await db.block.findUnique({
-    where: {
-      blockerId_blockingId: {
-        blockerId: user.id,
-        blockingId: channelId,
+    const blocked = await db.block.findUnique({
+      where: {
+        blockerId_blockingId: {
+          blockerId: user.id,
+          blockingId: channelId,
+        },
       },
-    },
-  });
+    });
 
-  return blocked;
+    return blocked;
+  } catch (error) {
+    return null;
+  }
 };
 
 export const findIMBlocked = async (channelId: string) => {
-  const user = await getCurrentUser();
+  try {
+    const user = await getCurrentUser();
 
-  const blocked = await db.block.findUnique({
-    where: {
-      blockerId_blockingId: {
-        blockerId: channelId,
-        blockingId: user.id,
+    const blocked = await db.block.findUnique({
+      where: {
+        blockerId_blockingId: {
+          blockerId: channelId,
+          blockingId: user.id,
+        },
       },
-    },
-  });
+    });
 
-  return blocked;
+    return blocked;
+  } catch (error) {
+    return null;
+  }
 };
 
 export const blockChannel = async (channelId: string) => {

@@ -76,16 +76,20 @@ export const unfollowChannel = async (channelId: string) => {
 };
 
 export const findFollowing = async (channelId: string) => {
-  const currentUser = await getCurrentUser();
+  try {
+    const currentUser = await getCurrentUser();
 
-  const following = await db.follow.findUnique({
-    where: {
-      followerId_followingId: {
-        followerId: currentUser.id,
-        followingId: channelId,
+    const following = await db.follow.findUnique({
+      where: {
+        followerId_followingId: {
+          followerId: currentUser.id,
+          followingId: channelId,
+        },
       },
-    },
-  });
+    });
 
-  return following;
+    return following;
+  } catch (error) {
+    return null;
+  }
 };
