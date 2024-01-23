@@ -9,6 +9,7 @@ import Chat, { ChatSkeleton } from './chat';
 import ChatToggle from './chat-toggle';
 import Header, { HeaderSkeleton } from './header';
 import VideoPlayer, { VideoPlayerSkeleton } from './video-player';
+import InfoCard from './info-card';
 
 type StreamPlayerProps = {
   stream: Stream;
@@ -53,6 +54,12 @@ const StreamPlayer = ({ channel, isFollowing, stream }: StreamPlayerProps) => {
               imageUrl={channel.image!}
               isFollowing={isFollowing}
               name={stream.name}
+            />
+            <InfoCard
+              hostIdentity={channel.id}
+              viewerIdentity={identity}
+              name={stream.name}
+              thumbnailUrl={stream.thumbnailUrl}
             />
           </div>
           <div className={cn('col-span-1', collapsed && 'hidden')}>
