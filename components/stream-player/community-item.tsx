@@ -24,7 +24,8 @@ const CommunityItem = ({
   const isHost = viewerName === hostName;
 
   const handleBlock = () => {
-    if (!participantName || !isSelf || !isHost) return;
+    if (!participantName || isSelf || !isHost) return;
+    console.log('this');
 
     startTransition(() => {
       onBlockChannel(participantIdentity)

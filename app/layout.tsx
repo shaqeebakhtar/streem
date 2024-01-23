@@ -21,7 +21,7 @@ export default function RootLayout({
       <Providers>
         <body className={inter.className}>
           {children}
-          <Toaster />
+          <Toaster position="bottom-center" />
         </body>
       </Providers>
     </html>

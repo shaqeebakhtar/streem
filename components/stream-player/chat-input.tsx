@@ -51,19 +51,22 @@ const ChatInput = ({
       {!isHidden && (
         <ChatInfo isDelayed={isDelayed} isFollowersOnly={isFollowersOnly} />
       )}
-      {(!isHidden || !isDisabled) && (
-        <form onSubmit={handleSubmit}>
-          <div className="flex items-center gap-2">
-            <Input
-              value={value}
-              onChange={(e) => onChange(e.currentTarget.value)}
-              placeholder="Send a message"
-              className="border-2 font-semibold border-zinc-700"
-            />
-            <Button type="submit">Chat</Button>
-          </div>
-        </form>
-      )}
+      {/* {!isDisabled && ( */}
+      <form onSubmit={handleSubmit}>
+        <div className="flex items-center gap-2">
+          <Input
+            value={value}
+            onChange={(e) => onChange(e.currentTarget.value)}
+            disabled={isDisabled}
+            placeholder="Send a message"
+            className="border-2 font-semibold border-zinc-700"
+          />
+          <Button type="submit" disabled={isDisabled}>
+            Chat
+          </Button>
+        </div>
+      </form>
+      {/* )} */}
     </div>
   );
 };
