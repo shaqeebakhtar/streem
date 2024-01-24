@@ -9,9 +9,9 @@ export const getFollowedChannels = async () => {
       where: {
         followerId: user.id,
         following: {
-          blocker: {
+          blocking: {
             none: {
-              blockerId: user.id,
+              blockingId: user.id,
             },
           },
         },
@@ -61,16 +61,18 @@ export const unfollowChannel = async (channelId: string) => {
     },
   });
 
-  if (!following) throw new Error(`You aren't following`);
+  let unfollowed = null;
 
-  const unfollowed = await db.follow.delete({
-    where: {
-      id: following.id,
-    },
-    include: {
-      following: true,
-    },
-  });
+  if (following) {
+    unfollowed = await db.follow.delete({
+      where: {
+        id: following.id,
+      },
+      include: {
+        following: true,
+      },
+    });
+  }
 
   return unfollowed;
 };

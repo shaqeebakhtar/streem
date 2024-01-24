@@ -72,3 +72,18 @@ export const unblockChannel = async (channelId: string) => {
 
   return unblocked;
 };
+
+export const getAllBlockedChannels = async () => {
+  const user = await getCurrentUser();
+
+  const blockedChannels = await db.block.findMany({
+    where: {
+      blockerId: user.id,
+    },
+    include: {
+      blocking: true,
+    },
+  });
+
+  return blockedChannels;
+};

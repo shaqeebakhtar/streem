@@ -18,7 +18,7 @@ export const getStreams = async () => {
       where: {
         user: {
           NOT: {
-            blocking: {
+            blocker: {
               some: {
                 blockerId: userId,
               },

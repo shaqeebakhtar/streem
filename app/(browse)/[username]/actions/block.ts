@@ -35,11 +35,12 @@ export const onBlockChannel = async (channelId: string) => {
 };
 
 export const onUnblockChannel = async (channelId: string) => {
+  const user = await getCurrentUser();
   const unblockedChannel = await unblockChannel(channelId);
 
   revalidatePath('/');
 
-  if (unblockedChannel) revalidatePath(`${unblockedChannel.blocking.username}`);
+  revalidatePath(`/u/${user.username}/community`);
 
   return unblockedChannel;
 };
