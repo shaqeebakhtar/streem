@@ -24,6 +24,11 @@ export const getStreams = async () => {
               },
             },
           },
+          blocking: {
+            none: {
+              blockingId: userId,
+            },
+          },
         },
       },
       select: {
