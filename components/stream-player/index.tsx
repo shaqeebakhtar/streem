@@ -12,12 +12,28 @@ import VideoPlayer, { VideoPlayerSkeleton } from './video-player';
 import InfoCard from './info-card';
 import AboutCard from './about-card';
 
+type CustomStream = {
+  id: string;
+  isLive: boolean;
+  isChatDelayed: boolean;
+  isChatEnabled: boolean;
+  isChatFollowersOnly: boolean;
+  thumbnailUrl: string | null;
+  name: string;
+};
+
+type CustomChannel = {
+  id: string;
+  username: string | null;
+  bio: string | null;
+  stream: CustomStream | null;
+  image: string | null;
+  _count: { followers: number };
+};
+
 type StreamPlayerProps = {
-  stream: Stream;
-  channel: User & {
-    stream: Stream | null;
-    _count: { followers: number };
-  };
+  stream: CustomStream;
+  channel: CustomChannel;
   isFollowing: boolean;
   isStreamOwner?: boolean;
 };

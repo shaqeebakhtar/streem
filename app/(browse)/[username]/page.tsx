@@ -1,10 +1,8 @@
+import StreamPlayer from '@/components/stream-player';
+import { findBlocked, findIMBlocked } from '@/services/block';
 import { findChannelByUsername } from '@/services/channel';
 import { findFollowing } from '@/services/follow';
 import { notFound } from 'next/navigation';
-import React from 'react';
-import Actions from './_components/actions';
-import { findBlocked, findIMBlocked } from '@/services/block';
-import StreamPlayer from '@/components/stream-player';
 
 type ChannelUserNameProps = {
   params: {
