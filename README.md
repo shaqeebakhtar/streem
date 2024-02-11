@@ -1,36 +1,89 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Streem
 
-## Getting Started
+Streem is a live streaming platform that helps you broadcast, watch, and interact with streams in real-time.
 
-First, run the development server:
+## Built With
+
+- NextJs
+- TypeScript
+- TailwindCSS
+- ShadcnUI
+- NextAuth
+- Prisma
+- PostgreSQL
+- LiveKit
+- Uploadthing
+- zod
+- zustand
+
+## Run Locally
+
+Follow the below steps to run this project locally
+
+### Clone the project
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+  git clone https://github.com/shaqeebakhtar/streem.git
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Go to the project directory
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+  cd streem
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+### Install dependencies
 
-## Learn More
+```bash
+  pnpm install
+```
 
-To learn more about Next.js, take a look at the following resources:
+### Copy .env.example to .env
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+  cp .env.example .env
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+### Update .env
 
-## Deploy on Vercel
+#### Generate Google OAuth client ID credentials
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Follow the mentioned steps - [Create access credentials](https://developers.google.com/workspace/guides/create-credentials#oauth-client-id)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Add `http://localhost:3000` under `Authorized JavaScript origins`
+
+Add `http://localhost:3000/api/auth/callback/google` under `Authorised redirect URIs`
+
+#### Generate LiveKit Keys
+
+- Signup on [LiveKit](https://livekit.io/)
+- Create a new project
+- Go to `Settings > Keys` and generate your tokens
+
+#### Generate Uploadthing Keys
+
+- Signup on [Uploadthing](https://uploadthing.com/)
+- Create a new app
+- Go to `Settings > API Keys`
+
+```bash
+  NEXTAUTH_SECRET="nextauth_secret"
+  DATABASE_URL="postgresql://postgres:password@localhost:5500/streem?schema=public"
+
+  GOOGLE_CLIENT_ID="client_id"
+  GOOGLE_CLIENT_SECRET="client_secret"
+
+  LIVEKIT_API_URL="https://project_url"
+  LIVEKIT_API_KEY="api_key"
+  LIVEKIT_API_SECRET="api_secret"
+  NEXT_PUBLIC_LIVEKIT_URL="wss://project_url"
+
+  UPLOADTHING_SECRET="uploadthing_secret"
+  UPLOADTHING_APP_ID="app_id"
+```
+
+Start the development server
+
+```bash
+  pnpm dev
+```
