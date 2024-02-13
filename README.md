@@ -82,6 +82,12 @@ Add `http://localhost:3000/api/auth/callback/google` under `Authorised redirect 
   UPLOADTHING_APP_ID="app_id"
 ```
 
+Start the Docker container for Postgres DB (Make sure you have Docker Desktop running initially)
+
+```bash
+  docker compose up -d
+```
+
 Start the development server
 
 ```bash
